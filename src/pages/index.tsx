@@ -1,13 +1,27 @@
-export default function Home(props) {  
+import { GetStaticProps } from 'next'
+
+type Episode = {
+  id: string,
+  title: string,
+  members: string,
+  // ...
+}
+
+type HomeProps = {
+  episodes: Episode[] // or Array<Episode>
+}
+
+export default function Home(props: HomeProps) {
   return (
     <div>
       <h1>Index</h1>
+
       <p>{JSON.stringify(props.episodes)}</p>
     </div>
   )
 }
 
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async () => {
   const response = await fetch('http://localhost:3333/episodes')
   const data = await response.json()
 
