@@ -62,6 +62,23 @@
           display: inline-block;
           margin-top: 0.5rem;
           font-size: 0.675rem;
+          
+          & + span {
+            position: relative;
+            margin-left: 1rem;
+            padding-left: 1rem;
+            
+            &::before {
+              content: '';
+              position: absolute;
+              left: 0;
+              top: 50%;
+              width: 4px;
+              height: 4px;
+              background-color: #ddd;
+              transform: translate(-50%, -50%);
+            }
+          }
         }
       }
 
