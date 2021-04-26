@@ -1,13 +1,12 @@
 import { GetStaticPaths, GetStaticProps } from 'next'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-
-import { api } from '../../services/api'
-
 import { format, parseISO } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 
+import { api } from '../../services/api'
 import { convertDurationToTimeString } from '../../utils/convertDurationToTimeString'
+
 import styles from './episode.module.scss'
 
 type Episode = {
