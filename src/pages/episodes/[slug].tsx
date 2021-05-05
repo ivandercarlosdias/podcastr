@@ -1,9 +1,11 @@
+import { useContext } from 'react'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { format, parseISO } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 
+import { PlayerContext } from '../../contexts/PlayerContext'
 import { api } from '../../services/api'
 import { convertDurationToTimeString } from '../../utils/convertDurationToTimeString'
 
@@ -28,6 +30,8 @@ type EpisodeProps = {
 export default function Episode({ episode }: EpisodeProps) {
     const { query } = useRouter()
 
+    const { play } = useContext(PlayerContext)
+
     return (
         <div className={styles.screenContent}>
             <div className={styles.episode}>
@@ -38,7 +42,7 @@ export default function Episode({ episode }: EpisodeProps) {
                         </button>
                     </Link>
                     <img src={episode.thumbnail} alt="Thumbnail" />
-                    <button>
+                    <button onClick={() => play(episode)}>
                         <img src="/play.svg" alt="Tocar episódio" />
                     </button>
                 </div>

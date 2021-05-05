@@ -9,7 +9,7 @@ import styles from './styles.module.scss'
 export default function Player() {
     const audioRef = useRef<HTMLAudioElement>(null)
 
-    const { episodeList, currentEpisodeIndex, isPlaying, tooglePlay, setPlayingState } = useContext(PlayerContext)
+    const { episodeList, currentEpisodeIndex, isPlaying, tooglePlay, setPlayingState, playNext, playPrevious, hasPrev, hasNext } = useContext(PlayerContext)
 
     useEffect(() => {
         if (!audioRef.current)
@@ -64,7 +64,7 @@ export default function Player() {
 
                 <div className={styles.buttons}>
                     <button disabled={!episode}><img src="/shuffle.svg" alt="Embaralhar" /></button>
-                    <button disabled={!episode}><img src="/play-previous.svg" alt="Tocar anterior" /></button>
+                    <button disabled={!episode || !hasPrev} onClick={playPrevious}><img src="/play-previous.svg" alt="Tocar anterior" /></button>
                     <button disabled={!episode} className={styles.play} onClick={tooglePlay}>
                         {isPlaying ? (
                             <img src="/pause.svg" alt="Tocar" />
@@ -72,7 +72,7 @@ export default function Player() {
                             <img src="/play.svg" alt="Tocar" />
                         )}
                     </button>
-                    <button disabled={!episode}><img src="/play-next.svg" alt="Tocar próximo" /></button>
+                    <button disabled={!episode || !hasNext} onClick={playNext}><img src="/play-next.svg" alt="Tocar próximo" /></button>
                     <button disabled={!episode}><img src="/repeat.svg" alt="Repetir" /></button>
                 </div>
             </footer>
